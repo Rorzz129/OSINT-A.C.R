@@ -3,6 +3,13 @@ import subprocess
 import exifread
 import os
 
+def pause():
+    input("\nAppuie sur Entrée pour continuer...")
+
+
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
 def extract_exif(image_path):
     with open(image_path, 'rb') as f:
         tags = exifread.process_file(f)
@@ -32,7 +39,7 @@ def get_gps(exif_data):
 
 
 def open_maps(lat, lon):
-    print(f"\n🌍 Opening maps for: {lat}, {lon}")
+    print(f"\nOpening maps for: {lat}, {lon}")
     webbrowser.open(f"https://www.google.com/maps?q={lat},{lon}")
     webbrowser.open(f"https://www.openstreetmap.org/?mlat={lat}&mlon={lon}")
 
@@ -46,6 +53,7 @@ if choice == '0':
     subprocess.run(["python", "menu.py"])
     exit()
 
+clear()
 print('''
       .-------------------.
      /--"--.------.------/|
@@ -61,28 +69,25 @@ print("""
 2 - Open StreetMaps
 """)
 
-# CHOIX UTILISATEUR
-
 try:
     choix = int(input("Choisis l'outil : "))
 except:
-    print("❌ Entrée invalide")
+    print("invalid Enter")
     exit()
 
-#Tool 1 - Données Exif d'une photo 
 if choix == 1:
-    image_path = input("📸 Enter image path: ").strip().strip('"')
+    image_path = input("Enter image path: ").strip().strip('"')
 
     if not os.path.exists(image_path):
-        print("❌ File not found")
+        print("! File not found")
         exit()
 
     exif_data = extract_exif(image_path)
 
-    print(f"\n🔎 Tags found: {len(exif_data)}\n")
+    print(f"\n! Tags found: {len(exif_data)}\n")
 
     if not exif_data:
-        print("❌ No EXIF data (image probably stripped)")
+        print("[+] No EXIF data (image probably stripped)")
     else:
         for tag in exif_data:
             print(f"{tag}: {exif_data[tag]}")
@@ -91,15 +96,14 @@ if choix == 1:
 
         if gps:
             lat, lon = gps
-            print(f"\n🌍 GPS FOUND: {lat}, {lon}")
+            print(f"\nGPS FOUND: {lat}, {lon}")
 
             open_choice = input("Open in maps? (y/n): ").lower()
             if open_choice == 'y':
                 open_maps(lat, lon)
         else:
-            print("❌ No GPS data found")
+            print("No GPS data found")
 
-#Tool 2 - GPS , LAT + LON  , Open GoogleMaps
 elif choix == 2:
     lat = input("Latitude : ")
     lon = input("Longitude : ")
@@ -109,8 +113,8 @@ elif choix == 2:
         lon = float(lon)
         open_maps(lat, lon)
     except:
-        print("❌ Invalid coordinates")
+        print("Invalid coordinates")
 
 
 else:
-    print("❌ Choix invalide")
+    print("Invalid Choice")

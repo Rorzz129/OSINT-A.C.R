@@ -1,6 +1,15 @@
 import subprocess
+import os
+
+def pause():
+    input("\nAppuie sur Entrée pour continuer...")
+
+
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
 
 def banner():
+    clear()
     print("""
                                                                                     
              .@@@@@@@@*.               .:@@@@@@@@@@@@@@@@=.       .*@@@@@@@@@@@@@@@@@@@@:..  
@@ -34,7 +43,8 @@ def menu():
     print("[2] - Dox.TXT")
     print("[3] - wordlist Generator")
     print("[4] - Analyse d'Image")
-    print("[5] - Mail Cheker (en cours de DEV !)")
+    print("[5] - ID creator")
+    print("[6] - LookUp")
     print("[0] - Quitter ! ")
 def main():
     while True:
@@ -49,7 +59,11 @@ def main():
         elif choice=="3":
             subprocess.run(["python","worldlistgen.py"])
         elif choice=="4":
-            subprocess.run(["python","image.py"]) 
+            subprocess.run(["python","image.py"])
+        elif choice=="5":
+            subprocess.run(["python","id.py"])
+        elif choice=="6":
+            subprocess.run(["python","lookup.py"])  
         elif choice=="0":
             break
         else:

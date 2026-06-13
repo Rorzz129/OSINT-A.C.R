@@ -11,14 +11,70 @@ Le projet est activement maintenu et recevra régulièrement des mises à jour, 
 ---
 
 
-### [-] Analyse EXIF
-### [-] Sherlock - Recherche de pseudo 
-### [-] Wordlist Generator
-### [-] IP / DNS / PORT LookUp
-### [-] Identities Manager
+### 📸 Analyse EXIF
+### 🌐 Sherlock - Recherche de pseudo 
+### 📝 Wordlist Generator
+
+
+## 🚀 Installation
+
+### Cloner le projet
+
+```bash
+git clone https://github.com/Rorzz129/-OSINT-Toolkit
+cd osint-toolkit
+```
+
+### Installer les dépendances
+
+```bash
+pip install -r requirements.txt
+```
+
+
+## 🔮 Fonctionnalités prévues
+
+Le projet est en développement actif.
+
+Prochaines fonctionnalités :
+
+- Analyse d'adresses e-mail
+- Lookup IP
+- Analyse de domaines
+- Recherche WHOIS
+- Géolocalisation
+- Vérification de fuites de données
+- Recherche avancée réseaux sociaux
+- Export des résultats
+---
+
+
+## 🤝 Contributions
+
+Les contributions sont les bienvenues.
+
+Pour contribuer :
+
+1. Fork le projet
+2. Crée une branche
+
+```bash
+git checkout -b feature/nouvelle-fonction
+```
+
+3. Commit tes modifications
+
+```bash
+git commit -m "Ajout d'une nouvelle fonctionnalité"
+```
+
+4. Push la branche
+
+```bash
+git push origin feature/nouvelle-fonction
+```
+
+5. Ouvre une Pull Request
 
 
 Le projet continuera d'évoluer avec de nouveaux modules et fonctionnalités OSINT au fil des mises à jour.
-
-
-<img width="571" height="386" alt="Capture d&#39;écran 2026-06-14 011728" src="https://github.com/user-attachments/assets/61e1ba84-644a-4d28-bf13-ce9243d411a1" />
