@@ -1,24 +1,17 @@
-# 🔎 OSINT Toolkit  { Toujours En Dev } 
+#🔎 OSINT Toolkit {Still in Development}
 
-## 📖 Description
+##📖 Description
 
-OSINT Toolkit est une suite d'outils Open Source dédiée à l'Open Source Intelligence (OSINT). Le projet regroupe plusieurs fonctionnalités permettant de collecter, analyser et exploiter des informations accessibles publiquement.
+OSINT Toolkit is an open-source suite dedicated to Open Source Intelligence (OSINT). The project brings together several features that allow users to collect, analyze, and exploit publicly available information.
+The goal is to provide a simple, fast, and scalable platform for cybersecurity enthusiasts, researchers, students, and professionals who want to perform OSINT investigations from a single interface.
+The project is actively maintained and will receive regular updates, new features, and improvements to expand its capabilities.
+Join Discord: https://discord.gg/hDE8P3f4Hy
 
-L'objectif est de fournir une plateforme simple, rapide et évolutive pour les passionnés de cybersécurité, chercheurs, étudiants et professionnels souhaitant effectuer des recherches OSINT depuis une seule interface.
-
-Le projet est activement maintenu et recevra régulièrement des mises à jour, de nouvelles fonctionnalités et des améliorations afin d'élargir ses capacités.
-
-### Join Discord : https://discord.gg/hDE8P3f4Hy
----
-
-
-### [+] Analyse EXIF
-### [+] Sherlock - Recherche de pseudo 
+### [+] EXIF Analysis
+### [+] Sherlock – Username search
 ### [+] Wordlist Generator
-### [+] Identities Manager 
-### [+] IP / DNS / PORT lookUp / 
-
-### I ADD Identities Generator / header LookUp / Whois LookUp
-
+### [+] Identity Manager
+### [+] IP / DNS / Port lookup
+I added Identity Generator / Header Lookup / WHOIS Lookup
 
 <img width="502" height="392" alt="Capture d&#39;écran 2026-06-14 011716" src="https://github.com/user-attachments/assets/80f5b5bf-28c7-48f7-b7c3-d6425a2a4091" />
