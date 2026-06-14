@@ -5,7 +5,8 @@
 OSINT Toolkit is an open-source suite dedicated to Open Source Intelligence (OSINT). The project brings together several features that allow users to collect, analyze, and exploit publicly available information.
 The goal is to provide a simple, fast, and scalable platform for cybersecurity enthusiasts, researchers, students, and professionals who want to perform OSINT investigations from a single interface.
 The project is actively maintained and will receive regular updates, new features, and improvements to expand its capabilities.
-Join Discord: https://discord.gg/hDE8P3f4Hy
+
+###Join Discord: https://discord.gg/hDE8P3f4Hy
 
 ### [+] EXIF Analysis
 ### [+] Sherlock – Username search
