@@ -1,36 +1,34 @@
 import os
-import subprocess
 import json
+import sys
+import subprocess
 
-def ask(prompt: str, obligatoire: bool = False):
+from utils import clear, pause, get_python
+
+PYTHON = get_python()
+
+
+def ask(prompt, obligatoire=False):
     while True:
         reponse = input(f"{prompt} : ").strip()
-
         if obligatoire and not reponse:
             print("Ce champ est obligatoire.")
             continue
-
         return reponse
-    
-def pause():
-    input("\nAppuie sur Entrée pour continuer...")
 
 
-def clear():
-    os.system("cls" if os.name == "nt" else "clear")
-    
 def list_profiles():
     dossier = "add"
-
+    if not os.path.isdir(dossier):
+        return []
     fichiers = os.listdir(dossier)
+    return [f.replace(".json", "") for f in fichiers if f.endswith(".json")]
 
-    profils = []
 
-    for f in fichiers:
-        if f.endswith(".json"):
-            profils.append(f.replace(".json", ""))
-
-    return profils
+def safe_path(filename):
+    safe = filename.strip().replace(" ", "_")
+    safe = safe.replace("..", "").replace("/", "").replace("\\", "")
+    return f"add/{safe}.json"
 
 
 def add():
@@ -62,20 +60,17 @@ def add():
     print("profil create successfully")
 
     os.makedirs("add", exist_ok=True)
-
-    filename = champs["profil_name"].strip().replace(" ", "_")
-    path = f"add/{filename}.json"
+    path = safe_path(champs["profil_name"])
 
     with open(path, "w", encoding="utf-8") as file:
         json.dump(champs, file, indent=4, ensure_ascii=False)
 
     print(f"\nProfil sauvegardé dans {path}")
-
     pause()
+
 
 def show():
     clear()
-
     profils = list_profiles()
 
     if not profils:
@@ -84,7 +79,6 @@ def show():
         return
 
     print("\n===== PROFILS DISPONIBLES =====\n")
-
     for i, p in enumerate(profils, 1):
         print(f"[{i}] {p}")
 
@@ -107,19 +101,15 @@ def show():
         data = json.load(file)
 
     clear()
-
     print("\n===== PROFIL =====\n")
-
     for key, value in data.items():
         print(f"{key:<20} : {value}")
-
     print("\n====================")
-
     pause()
+
 
 def delete_profile():
     clear()
-
     profils = list_profiles()
 
     if not profils:
@@ -128,7 +118,6 @@ def delete_profile():
         return
 
     print("\n===== PROFILS =====\n")
-
     for i, p in enumerate(profils, 1):
         print(f"[{i}] {p}")
 
@@ -145,7 +134,6 @@ def delete_profile():
         return
 
     profil_choisi = profils[choix - 1]
-
     confirmation = input(f"\nSupprimer '{profil_choisi}' ? (o/n) : ").strip().lower()
 
     if confirmation == "o":
@@ -158,23 +146,23 @@ def delete_profile():
     pause()
 
 
-def main(): 
+def main():
     while True:
         clear()
         print("""\n
 
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣶⣿⣿⣿⣿⣿⣶⡀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠆       Osint - Identities
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣽⣿⣿⣿⣿⣿⣿⣿⡟⠀            By Rorz X Offset
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⡿⠁
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⢻⣿⣿⣿⣿⣿⣿⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣶⣿⣿⣿⣿⣿⣶⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠆       Osint - Identities
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣽⣿⣿⣿⣿⣿⣿⣿⡟⠀            By Rorz X Offset
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⡿⠁
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⢻⣿⣿⣿⣿⣿⣿⡀
 ⠀⠀⠀⠀⢀⣠⣤⣴⣾⣿⣿⣿⠛⠀⠙⡿⠟⠋⠀⣿⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⡟⠀⣰⣿⣿⣆⠀⢰⣿⣿⣿⣿⣿⣷⣶⣄⡀⠀⠀
 ⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⣰⣿⣷⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀
 ⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢰⣿⣿⣿⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀
-⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇           
+⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇
  """)
         print("\n1 - Add Profiles")
         print("2 - show Profiles")
@@ -185,18 +173,16 @@ def main():
 
         if choix == "1":
             add()
-
         elif choix == "2":
             show()
-
         elif choix == "3":
             delete_profile()
-
         elif choix == '4':
-            subprocess.run(["python", "menu.py"])
-
+            subprocess.run([PYTHON, "menu.py"])
+            break
         else:
             print("Invalid option.")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

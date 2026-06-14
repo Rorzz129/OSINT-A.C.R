@@ -1,14 +1,18 @@
 import webbrowser
 import subprocess
-import exifread
 import os
+import sys
 
-def pause():
-    input("\nAppuie sur Entrée pour continuer...")
+from utils import clear, pause, get_python
 
+PYTHON = get_python()
 
-def clear():
-    os.system("cls" if os.name == "nt" else "clear")
+try:
+    import exifread
+except ImportError:
+    print("Missing module: exifread. Install with: pip install exifread")
+    sys.exit(1)
+
 
 def extract_exif(image_path):
     with open(image_path, 'rb') as f:
@@ -34,7 +38,7 @@ def get_gps(exif_data):
             lon = -lon
 
         return lat, lon
-    except:
+    except (KeyError, IndexError, ZeroDivisionError):
         return None
 
 
@@ -43,18 +47,20 @@ def open_maps(lat, lon):
     webbrowser.open(f"https://www.google.com/maps?q={lat},{lon}")
     webbrowser.open(f"https://www.openstreetmap.org/?mlat={lat}&mlon={lon}")
 
-choice = input(
-    "0 - Return Launcher\n"
-    "1 - Stay on the tool\n" \
-    "choix 0 OR 1 :"
-)
 
-if choice == '0':
-    subprocess.run(["python", "menu.py"])
-    exit()
+def main():
+    choice = input(
+        "0 - Return Launcher\n"
+        "1 - Stay on the tool\n"
+        "choix 0 OR 1 :"
+    )
 
-clear()
-print('''
+    if choice == '0':
+        subprocess.run([PYTHON, "menu.py"])
+        return
+
+    clear()
+    print('''
       .-------------------.
      /--"--.------.------/|
      |RORZZ|__Ll__| [==] ||
@@ -64,57 +70,60 @@ print('''
      `-----'------'------'
 ''')
 
-print("""
+    print("""
 1 - Photo EXIF
 2 - Open StreetMaps
 """)
 
-try:
-    choix = int(input("Choisis l'outil : "))
-except:
-    print("invalid Enter")
-    exit()
-
-if choix == 1:
-    image_path = input("Enter image path: ").strip().strip('"')
-
-    if not os.path.exists(image_path):
-        print("! File not found")
-        exit()
-
-    exif_data = extract_exif(image_path)
-
-    print(f"\n! Tags found: {len(exif_data)}\n")
-
-    if not exif_data:
-        print("[+] No EXIF data (image probably stripped)")
-    else:
-        for tag in exif_data:
-            print(f"{tag}: {exif_data[tag]}")
-
-        gps = get_gps(exif_data)
-
-        if gps:
-            lat, lon = gps
-            print(f"\nGPS FOUND: {lat}, {lon}")
-
-            open_choice = input("Open in maps? (y/n): ").lower()
-            if open_choice == 'y':
-                open_maps(lat, lon)
-        else:
-            print("No GPS data found")
-
-elif choix == 2:
-    lat = input("Latitude : ")
-    lon = input("Longitude : ")
-
     try:
-        lat = float(lat)
-        lon = float(lon)
-        open_maps(lat, lon)
-    except:
-        print("Invalid coordinates")
+        choix = int(input("Choisis l'outil : "))
+    except ValueError:
+        print("invalid Enter")
+        return
+
+    if choix == 1:
+        image_path = input("Enter image path: ").strip().strip('"')
+
+        if not os.path.exists(image_path):
+            print("! File not found")
+            return
+
+        exif_data = extract_exif(image_path)
+
+        print(f"\n! Tags found: {len(exif_data)}\n")
+
+        if not exif_data:
+            print("[+] No EXIF data (image probably stripped)")
+        else:
+            for tag in exif_data:
+                print(f"{tag}: {exif_data[tag]}")
+
+            gps = get_gps(exif_data)
+
+            if gps:
+                lat, lon = gps
+                print(f"\nGPS FOUND: {lat}, {lon}")
+
+                open_choice = input("Open in maps? (y/n): ").lower()
+                if open_choice == 'y':
+                    open_maps(lat, lon)
+            else:
+                print("No GPS data found")
+
+    elif choix == 2:
+        lat = input("Latitude : ")
+        lon = input("Longitude : ")
+
+        try:
+            lat = float(lat)
+            lon = float(lon)
+            open_maps(lat, lon)
+        except ValueError:
+            print("Invalid coordinates")
+
+    else:
+        print("Invalid Choice")
 
 
-else:
-    print("Invalid Choice")
+if __name__ == "__main__":
+    main()

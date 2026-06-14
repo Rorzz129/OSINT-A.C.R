@@ -1,25 +1,27 @@
-import requests
 import socket
 import subprocess
 import os
+import sys
 
-def pause():
-    input("\nAppuie sur Entrée pour continuer...")
+from utils import clear, pause, get_python
+
+PYTHON = get_python()
+
+try:
+    import requests
+except ImportError:
+    print("Missing module: requests. Install with: pip install requests")
+    sys.exit(1)
 
 
-def clear():
-    os.system("cls" if os.name == "nt" else "clear")
-
-import socket
-
-def port():
+def port_scanner():
     clear()
 
     target = input("IP ou domaine : ").strip()
 
     try:
         ip = socket.gethostbyname(target)
-    except:
+    except socket.gaierror:
         print("Erreur : cible invalide.")
         pause()
         return
@@ -48,22 +50,18 @@ def port():
     for port, service in ports.items():
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(0.7)
-
-        result = sock.connect_ex((ip, port))
-
-        if result == 0:
-            status = "OPEN"
-        else:
-            status = "CLOSED"
-
-        print(f"{port:<8} {status:<10} {service}")
-
-        sock.close()
+        try:
+            result = sock.connect_ex((ip, port))
+            status = "OPEN" if result == 0 else "CLOSED"
+            print(f"{port:<8} {status:<10} {service}")
+        finally:
+            sock.close()
 
     print("\nScan terminé")
     pause()
 
-def dns():
+
+def dns_lookup():
     clear()
 
     domain = input("Domaine (ex: google.com) : ").strip()
@@ -72,39 +70,37 @@ def dns():
         clear()
         print("===== DNS LOOKUP =====\n")
 
-        # IP principale
         ip = socket.gethostbyname(domain)
         print(f"Domaine        : {domain}")
         print(f"IP principale  : {ip}")
 
-        # Reverse lookup (IP -> hostname)
         try:
             host = socket.gethostbyaddr(ip)
             print(f"Hostname       : {host[0]}")
-        except:
+        except (socket.herror, socket.gaierror):
             print("Hostname       : introuvable")
 
-        # Toutes les IPs (si plusieurs serveurs)
         try:
             all_ips = socket.gethostbyname_ex(domain)[2]
             print("\n--- Toutes les IPs ---")
             for i, ip_addr in enumerate(all_ips, 1):
                 print(f"{i}. {ip_addr}")
-        except:
+        except socket.gaierror:
             pass
 
-    except:
+    except (socket.gaierror, OSError):
         print("Erreur : domaine introuvable ou DNS invalide.")
 
     pause()
 
-def ip():
+
+def ip_lookup():
     clear()
 
     ip = input("IP à analyser : ").strip()
 
     try:
-        r = requests.get(f"http://ip-api.com/json/{ip}")
+        r = requests.get(f"https://ip-api.com/json/{ip}", timeout=10)
         data = r.json()
 
         clear()
@@ -119,17 +115,18 @@ def ip():
         print(f"Latitude  : {data.get('lat')}")
         print(f"Longitude : {data.get('lon')}")
 
-    except:
+    except requests.RequestException:
         print("Erreur lors de la requête.")
 
     pause()
+
 
 def main():
     while True:
         print("""
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠤⠴⠶⡇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣾⣿⡟
-⠀⠀⠀⠀⠀⠀⠀⠂⠉⡇⠀⠀⠀⢰⣿⣿⣿⣿⣧⠀⠀⢀⣄⣀
+⠀⠀⠀⠀⠀⠀⠀⠀⠂⠉⡇⠀⠀⠀⢰⣿⣿⣿⣿⣧⠀⠀⢀⣄⣀
 ⠀⠀⠀⠀⠀⠀⢠⣶⣶⣷⠀⠀⠀⠸⠟⠁⠀⡇⠀⠀⠀⠀⠀⢹
 ⠀⠀⠀⠀⠀⠀⠘⠟⢹⣋⣀⡀⢀⣤⣶⣿⣿⣿⣿⣿⡿⠛⣠⣼⣿⡟
 ⠀⠀⠀⠀⠀⣴⣾⣿⣿⣿⣿⢁⣾⣿⣿⣿⣿⣿⣿⡿⢁⣾⣿⣿⣿⠁         Look Up - IP / DNS / Port
@@ -141,7 +138,7 @@ def main():
 ⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠛⠉
     """)
-    
+
         print("\n[1] - Port Analyser")
         print("[2] - DNS LookUp")
         print("[3] - IP LookUp")
@@ -150,19 +147,17 @@ def main():
         choix = input("\n Choose an Option: ").strip()
 
         if choix == "1":
-            port()
-
+            port_scanner()
         elif choix == "2":
-            dns()
-
+            dns_lookup()
         elif choix == "3":
-            ip()
-
+            ip_lookup()
         elif choix == '4':
-            subprocess.run(["python", "menu.py"])
-
+            subprocess.run([PYTHON, "menu.py"])
+            break
         else:
             print("Invalid option.")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

@@ -1,9 +1,0 @@
-os
-exifread
-subprocess
-webbrowser
-itertools
-datetime
-sys
-asyncio
-aiohttp

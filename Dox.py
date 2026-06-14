@@ -1,109 +1,112 @@
 import os
+import sys
 import subprocess
 
-banner = """                             
-⠀ 
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⣰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+from utils import clear, pause, get_python
+
+BANNER = """\
+                             
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⣰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⡀⠀⢀⠒⠑⣴⣦⣾⣧⣤⢀⡤⠀⠀⠀⡀⠀⠀⠀
 ⠀⠀⠀⠀⢀⠀⢀⡘⠉⠁⣰⣾⣿⣿⣿⣿⣿⣿⣷⢀⡤⠊⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢱⠊⡄⠒⠾⣿⣿⣿⣿⣿⣿⠿⠛⢹⣿⣯⣤⠤⠄⠀⠀
-⠀⠀⠀⠒⢦⠂⠀⣇⠀⠸⠟⢈⣿⣿⡁⠺⠗⠀⣸⣿⣿⣃⠀⠀⠀⠀
-⠀⠀⠀⠀⢘⢀⣼⠻⢷⣶⣶⣿⣿⣿⣿⣶⣶⣾⠟⣻⣿⡯⠁⠀⠀⠀
-⠀⠀⠀⠉⠱⢾⣿⡀⠀⠈⠉⠙⠛⠛⠛⠉⠉⠀⢀⣿⣿⠿⠛⠒⠀⠀
-⠀⠀⠀⠀⠔⢛⣿⣷⡈⠒⠀⠀⠀⠔⠁⠊⠒⢈⣾⣿⡏⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠔⢦⠂⠀⣇⠀⠸⠟⢈⣿⣿⡁⠺⠗⠀⣸⣿⣿⣃⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢘⢀⣼⠻⢷⣶⣶⣿⣿⣿⣿⣶⣶⣾⠟⣻⣿⡯⠁⠀⠀⠀
+⠀⠀⠀⠀⠉⠱⢾⣿⡀⠀⠈⠉⠙⠛⠛⠛⠉⠉⠀⢀⣿⣿⠿⠛⠒⠀⠀
+⠀⠀⠀⠀⠀⠔⢛⣿⣷⡈⠒⠀⠀⠀⠔⠁⠊⠒⢈⣾⣿⡏⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠜⠛⠿⣿⣶⣤⣀⣀⣀⣀⣤⣶⣿⠿⣿⠉⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⡸⠛⢉⡿⠻⠟⣿⢿⡟⣏⠁⠀⠘⠄⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡜⠀⠀⠀⠁⠀⠃⠘⡀⠀⠀⠀⠀⠀
-                                                    
+                                 
                         TOOL BY RORZ - OSINT Recap
                       [N'hésitez pas à DOX des FAFS]
-                        
-                        
-                        
 """
 
-print(banner)
+PYTHON = get_python()
 
-# 🔧 Fonction pour aligner proprement
+
 def ligne(label, valeur):
     return f"{label:<22} : {valeur}"
 
-choice = input(
-    "0 - Return Launcher\n"
-    "1 - Stay on the tool\n" \
-    "choix 0 OR 1 :"
-)
 
-if choice == '0':
-    subprocess.run(["python", "menu.py"])
-    exit()
+def main():
+    print(BANNER)
 
-why = input("[+] Pourquoi Cette Fiche : ")
+    choice = input(
+        "0 - Return Launcher\n"
+        "1 - Stay on the tool\n"
+        "choix 0 OR 1 :"
+    )
 
-print("Cible Principal")
-print("-------------------------------------")
+    if choice == '0':
+        subprocess.run([PYTHON, "menu.py"])
+        return
 
-nom = input("[+] Nom : ")
-Prenom = input("[+] Prenom : ")
-Pseudo = input("[+] Pseudo : ")
-Pseudo2 = input("[+] Pseudo 2 : ")
-Ville = input("[+] Ville : ")
-pays = input("[+] Pays : ")
-adress = input("[+] Adress : ")
+    why = input("[+] Pourquoi Cette Fiche : ")
 
-print("\nReseaux sociaux")
-print("-------------------------------------")
+    print("Cible Principal")
+    print("-------------------------------------")
 
-insta = input("[+] instagram : ")
-tiktok = input("[+] tiktok : ")
-youtube = input("[+] Youtube : ")
-X = input("[+] Twitter : ")
-facebook = input("[+] facebook : ")
+    nom = input("[+] Nom : ")
+    prenom = input("[+] Prenom : ")
+    pseudo = input("[+] Pseudo : ")
+    pseudo2 = input("[+] Pseudo 2 : ")
+    ville = input("[+] Ville : ")
+    pays = input("[+] Pays : ")
+    adress = input("[+] Adress : ")
 
-print("\nFamilles")
-print("-------------------------------------")
+    print("\nReseaux sociaux")
+    print("-------------------------------------")
 
-Pn = input("[+] Nom,Prenom père : ")
-Mn = input("[+] Nom,Prenom mère : ")
-Adressen = input("[+] Adresse Parent : ")
-NP = input("[+] Numero père : ")
-NM = input("[+] Numero mère : ")
+    insta = input("[+] instagram : ")
+    tiktok = input("[+] tiktok : ")
+    youtube = input("[+] Youtube : ")
+    twitter = input("[+] Twitter : ")
+    facebook = input("[+] facebook : ")
 
-print("\nInformations de contact")
-print("-------------------------------------")
+    print("\nFamilles")
+    print("-------------------------------------")
 
-mail = input("[+] Mail : ")
-num = input("[+] Numero : ")
-maill = input("[+] Ancien Mail : ")
+    pere = input("[+] Nom,Prenom père : ")
+    mere = input("[+] Nom,Prenom mère : ")
+    adress_parents = input("[+] Adresse Parent : ")
+    num_pere = input("[+] Numero père : ")
+    num_mere = input("[+] Numero mère : ")
 
-print("\nInfo +")
-print("-------------------------------------")
+    print("\nInformations de contact")
+    print("-------------------------------------")
 
-password = input("[+] Password : ")
-compte = input("[+] Compte liée au Mail : ")
-ID = input("[+] ID Discord: ")
-IDD = input("[+] ID Site: ")
-animal = input("[+] Animal Name: ")
-Pass = input("[+] Passion : ")
-Jeux = input("[+] Jeux préférés : ")
+    mail = input("[+] Mail : ")
+    num = input("[+] Numero : ")
+    ancien_mail = input("[+] Ancien Mail : ")
 
-print("\nNote +")
-print("-------------------------------------")
+    print("\nInfo +")
+    print("-------------------------------------")
 
-note = input("des choses en + ? ")
+    password = input("[+] Password : ")
+    compte = input("[+] Compte liée au Mail : ")
+    discord_id = input("[+] ID Discord: ")
+    site_id = input("[+] ID Site: ")
+    animal = input("[+] Animal Name: ")
+    passion = input("[+] Passion : ")
+    jeux = input("[+] Jeux préférés : ")
 
-# 📄 Texte final avec alignement + banner
-texte = f"""{banner}
+    print("\nNote +")
+    print("-------------------------------------")
+
+    note = input("des choses en + ? ")
+
+    texte = f"""{BANNER}
 
 {ligne("Pourquoi Cette Fiche ? ", why)}
 
 ================= CIBLE PRINCIPALE =================
 
 {ligne("Nom", nom)}
-{ligne("Prenom", Prenom)}
-{ligne("Pseudo", Pseudo)}
-{ligne("Pseudo Secondaire", Pseudo2)}
-{ligne("Ville", Ville)}
+{ligne("Prenom", prenom)}
+{ligne("Pseudo", pseudo)}
+{ligne("Pseudo Secondaire", pseudo2)}
+{ligne("Ville", ville)}
 {ligne("Pays", pays)}
 {ligne("Adresse", adress)}
 
@@ -112,44 +115,52 @@ texte = f"""{banner}
 {ligne("Instagram", insta)}
 {ligne("TikTok", tiktok)}
 {ligne("YouTube", youtube)}
-{ligne("Twitter", X)}
+{ligne("Twitter", twitter)}
 {ligne("Facebook", facebook)}
 
 ================= FAMILLE =================
 
-{ligne("Pere", Pn)}
-{ligne("Mere", Mn)}
-{ligne("Adresse parents", Adressen)}
-{ligne("Numero pere", NP)}
-{ligne("Numero mere", NM)}
+{ligne("Pere", pere)}
+{ligne("Mere", mere)}
+{ligne("Adresse parents", adress_parents)}
+{ligne("Numero pere", num_pere)}
+{ligne("Numero mere", num_mere)}
 
 =================CONTACT =================
 
 {ligne("Mail", mail)}
 {ligne("Numero", num)}
-{ligne("Mail 2", maill)}
+{ligne("Mail 2", ancien_mail)}
 
 ================= INFO + =================
 
 {ligne("Password", password)}
 {ligne("Compte lie", compte)}
-{ligne("ID Discord", ID)}
-{ligne("ID Sites", IDD)}
+{ligne("ID Discord", discord_id)}
+{ligne("ID Sites", site_id)}
 {ligne("Animal", animal)}
-{ligne("Passion", Pass)}
-{ligne("Jeux Pref", Jeux)}
+{ligne("Passion", passion)}
+{ligne("Jeux Pref", jeux)}
 
 ================= Note + =================
 
 {ligne("des choses en + ?  ", note)}
 """
 
-# 📁 Nom du fichier basé sur le prénom
-nom_fichier = f"{Prenom}.txt"
-chemin = os.path.join(os.path.dirname(__file__), nom_fichier)
+    nom_fichier = f"{prenom}.txt" if prenom else "output.txt"
+    chemin = os.path.join(os.path.dirname(__file__), nom_fichier)
 
-# 💾 Écriture
-with open(chemin, "w", encoding="utf-8") as fichier:
-    fichier.write(texte)
+    if os.path.exists(chemin):
+        overwrite = input(f"\n[!] {nom_fichier} existe déjà. Écraser ? (o/n) : ").strip().lower()
+        if overwrite != "o":
+            print("Annulé.")
+            return
 
-print(f"\n✅ Données enregistrées dans {nom_fichier}")
+    with open(chemin, "w", encoding="utf-8") as fichier:
+        fichier.write(texte)
+
+    print(f"\n✅ Données enregistrées dans {nom_fichier}")
+
+
+if __name__ == "__main__":
+    main()
