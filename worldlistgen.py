@@ -4,6 +4,14 @@ import subprocess
 import sys
 from datetime import datetime
 
+def pause():
+    input("\n[-] Press any keys to continue...")
+
+
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
+clear()
 BANNER = r"""
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣶⣿⣿⣿⣿⣿⣶⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿
@@ -55,7 +63,7 @@ def demander(prompt: str, obligatoire: bool = False) -> str:
             print("\n"); sys.exit(0)
         if reponse or not obligatoire:
             return reponse
-        warn("Ce champ est obligatoire.")
+        warn("This field is mandatory")
 
 
 def oui_non(prompt: str, defaut: bool = False) -> bool:
@@ -68,7 +76,7 @@ def oui_non(prompt: str, defaut: bool = False) -> bool:
         if r == "":         return defaut
         if r in ("oui","o","yes","y"): return True
         if r in ("non","n","no"):      return False
-        warn("Répondez par oui ou non.")
+        warn("Answer yes or no")
 
 
 def saisir_entier(prompt: str, defaut: int, mini: int = 1, maxi: int = 10_000) -> int:
@@ -78,9 +86,9 @@ def saisir_entier(prompt: str, defaut: int, mini: int = 1, maxi: int = 10_000) -
             n = int(val or defaut)
             if mini <= n <= maxi:
                 return n
-            warn(f"Entrez un entier entre {mini} et {maxi}.")
+            warn(f"Enter an integer between {mini} et {maxi}.")
         except ValueError:
-            warn("Entier invalide.")
+            warn("Invalid integer")
         except (KeyboardInterrupt, EOFError):
             print("\n"); sys.exit(0)
 
@@ -163,32 +171,32 @@ def main():
     titre("\n Informations cible \n")
 
     champs = {
-        "prenom":  demander("[+] Prénom          : "),
-        "nom":     demander("[+] Nom             : "),
-        "pseudo":  demander("[+] Pseudo / login  : "),
-        "annee":   demander("[+] Année naissance : "),
-        "animal":  demander("[+] Animal préféré  : "),
-        "ville":   demander("[+] Ville / pays    : "),
-        "mot_cle": demander("[+] Mot clé (hobby) : "),
-        "extra":   demander("[+] Info bonus      : "),
+        "Firstname":  demander("[+] Firstname        : "),
+        "name":       demander("[+] Name            : "),
+        "pseudo":     demander("[+] Pseudo / login  : "),
+        "years":      demander("[+] Year of birth   : "),
+        "animal":     demander("[+] Favorite animal : "),
+        "city":       demander("[+] City / country  : "),
+        "keyword":    demander("[+] Keyword (hobby) : "),
+        "extra":      demander("[+] Bonus info      : "),
     }
 
     print()
-    avec_nombres   = oui_non("[+] Ajouter des nombres ?",                    defaut=True)
-    avec_speciaux  = oui_non("[+] Ajouter des caractères spéciaux ?",        defaut=True)
-    avec_mutations = oui_non("[+] Appliquer mutations (leet, doublons…) ?",  defaut=True)
-    avec_filtre    = oui_non("[+] Filtrer longueurs hors [4-32] ?",          defaut=True)
+    avec_nombres   = oui_non("[+] Add Numbers ?",                    defaut=True)
+    avec_speciaux  = oui_non("[+] Add special characters ? ",        defaut=True)
+    avec_mutations = oui_non("[+] Apply mutations (leet, duplicates...) ?",  defaut=True)
+    avec_filtre    = oui_non("[+] Filter lengths off [4-32] ?",          defaut=True)
 
-    plage      = saisir_entier("[+] Plage de nombres (0 → N)", 100, 1, 9999) if avec_nombres else 100
-    profondeur = saisir_entier("[+] Profondeur des combinaisons (2-4)", 3, 2, 4)
+    plage      = saisir_entier("[+] Number range (0 → N)", 100, 1, 9999) if avec_nombres else 100
+    profondeur = saisir_entier("[+] Depth of combinations (2-4)", 3, 2, 4)
 
     infos = [v for v in champs.values() if v]
     if not infos:
-        erreur("Aucune information fournie. Abandon.")
+        erreur("No information provided. Abandonment")
         sys.exit(1)
 
     print()
-    titre("[+] Génération en cours…\n")
+    titre("[+] Generation in progress...\n")
 
     wordlist = generer_base(infos, profondeur=profondeur)
     info(f"Base                : {len(wordlist):>12,} mots")
@@ -217,14 +225,14 @@ def main():
 
     print(f"""
 ╔══════════════════════════════════════════════════
-║              GÉNÉRATION TERMINÉE                ║ 
+║              GÉNÉRATION TERMINÉE                
 ╠══════════════════════════════════════════════════
-║  Mots générés  : {nb_mots:>12,}                 ║   
-║  Fichier       : {nom_fichier:<30}              ║
-║  Taille        : {taille_mo:>11.2f} Mo          ║      
+║  Generated words  : {nb_mots:>12,}                  
+║  file             : {nom_fichier:<30}              
+║  Size             : {taille_mo:>11.2f} Mo          
 ╚══════════════════════════════════════════════════
 """)
-
+pause()
 
 if __name__ == "__main__":
     main()

@@ -10,13 +10,13 @@ def ask(prompt: str, obligatoire: bool = False):
         reponse = input(f"{prompt} : ").strip()
 
         if obligatoire and not reponse:
-            print("Ce champ est obligatoire.")
+            print("This field is mandatory.")
             continue
 
         return reponse
     
 def pause():
-    input("\n[-] Appuie sur Entrée pour continuer...")
+    input("\n[-] Press any keys to continue...")
 
 
 def clear():
@@ -38,28 +38,28 @@ def list_profiles():
 
 def add():
     champs = {
-        "profil_name": ask("[+] profil_name"),
-        "nom": ask("[+] Nom"),
-        "prenom": ask("[+] Prenom"),
+        "profile_name": ask("[+] Profile name"),
+        "last_name": ask("[+] Last name"),
+        "first_name": ask("[+] First name"),
         "age": ask("[+] Age"),
-        "mail": ask("[+] Mail"),
-        "num": ask("[+] Phone Number"),
+        "email": ask("[+] Email"),
+        "phone_number": ask("[+] Phone number"),
         "birthday": ask("[+] Birthday"),
-        "ville_de_naissance": ask("[+] Ville de naissance"),
+        "place_of_birth": ask("[+] Place of birth"),
         "bio": ask("[+] Bio"),
-        "pseudo": ask("[+] Pseudo"),
-        "adresse": ask("[+] Adresse"),
-        "compte": ask("[+] Compte"),
-        "sexe": ask("[+] Sexe"),
-        "nationalite": ask("[+] Nationalité"),
+        "username": ask("[+] Username"),
+        "address": ask("[+] Address"),
+        "account": ask("[+] Account"),
+        "gender": ask("[+] Gender"),
+        "nationality": ask("[+] Nationality"),
         "discord": ask("[+] Discord"),
         "instagram": ask("[+] Instagram"),
         "telegram": ask("[+] Telegram"),
-        "job": ask("[+] Travail"),
-        "etudes": ask("[+] Études"),
+        "job": ask("[+] Job"),
+        "studies": ask("[+] Studies"),
         "hobbies": ask("[+] Hobbies"),
-        "mot_de_passe": ask("[+] Mot de passe"),
-        "email_backup": ask("[+] Email de secours"),
+        "password": ask("[+] Password"),
+        "backup_email": ask("[+] Backup email"),
     }
 
     print("[-] profil create successfully")
@@ -72,7 +72,7 @@ def add():
     with open(path, "w", encoding="utf-8") as file:
         json.dump(champs, file, indent=4, ensure_ascii=False)
 
-    print(f"\n[-] Profil sauvegardé dans {path}")
+    print(f"\n[-] Profil Saved in {path}")
 
     pause()
 
@@ -82,24 +82,24 @@ def show():
     profils = list_profiles()
 
     if not profils:
-        print("Aucun profil trouvé.")
+        print(" Nothing Found ( 0 Profils )")
         pause()
         return
 
-    print("\n[-] PROFILS DISPONIBLES [-]\n")
+    print("\n[-] PROFILES AVAILABLE [-]\n")
 
     for i, p in enumerate(profils, 1):
         print(f"[{i}] {p}")
 
     try:
-        choix = int(input("\n[-] Choisis un profil : ").strip())
+        choix = int(input("\n[-] Choose a profile : ").strip())
     except ValueError:
-        print("Choix invalide.")
+        print("Invalid Choice ! ")
         pause()
         return
 
     if choix < 1 or choix > len(profils):
-        print("Profil inexistant.")
+        print("Non-existent profile")
         pause()
         return
 
@@ -126,37 +126,37 @@ def delete_profile():
     profils = list_profiles()
 
     if not profils:
-        print("Aucun profil à supprimer.")
+        print("No profiles to delete")
         pause()
         return
 
-    print("\n===== PROFILS =====\n")
+    print("\n===== PROFILES =====\n")
 
     for i, p in enumerate(profils, 1):
         print(f"[{i}] {p}")
 
     try:
-        choix = int(input("\nChoisis le profil à supprimer : ").strip())
+        choix = int(input("\nChoose the profile to delete : ").strip())
     except ValueError:
-        print("Choix invalide.")
+        print("Invalid choice")
         pause()
         return
 
     if choix < 1 or choix > len(profils):
-        print("Profil inexistant.")
+        print("Non-existent profile")
         pause()
         return
 
     profil_choisi = profils[choix - 1]
 
-    confirmation = input(f"\nSupprimer '{profil_choisi}' ? (o/n) : ").strip().lower()
+    confirmation = input(f"\nDelete '{profil_choisi}' ? (o/n) : ").strip().lower()
 
     if confirmation == "o":
         path = f"add/{profil_choisi}.json"
         os.remove(path)
-        print("Profil supprimé avec succès.")
+        print("Profile successfully deleted")
     else:
-        print("Suppression annulée.")
+        print("Deletion canceled")
 
     pause()
 
@@ -166,7 +166,7 @@ def profil_gen():
     def lire_fichier(fichier):
         chemin = os.path.join(dossier, fichier)
         if not os.path.exists(chemin):
-            print(f"[ERREUR] Fichier manquant : {chemin}")
+            print(f"[ERREUR] midding file : {chemin}")
             return []
 
         with open(chemin, "r", encoding="utf-8") as f:
@@ -175,20 +175,20 @@ def profil_gen():
     ages = lire_fichier("age.txt")
     jobs = lire_fichier("jobs.txt")
     nationalites = lire_fichier("nationalite.txt")
-    noms = lire_fichier("nom.txt")
-    prenoms = lire_fichier("prenom.txt")
+    name = lire_fichier("nom.txt")
+    firstname = lire_fichier("prenom.txt")
     pseudos = lire_fichier("pseudo.txt")
 
     # sécurité si fichiers vides
-    if not all([ages, jobs, nationalites, noms, prenoms, pseudos]):
-        print("Erreur : un ou plusieurs fichiers sont vides.")
+    if not all([ages, jobs, nationalites, name, firstname, pseudos]):
+        print("Error: One or more files are empty")
         pause()
         return
 
     def creer_profil():
         return {
-            "prenom": random.choice(prenoms),
-            "nom": random.choice(noms),
+            "FirstName": random.choice(firstname),
+            "name": random.choice(name),
             "age": random.choice(ages),
             "job": random.choice(jobs),
             "nationalite": random.choice(nationalites),
@@ -196,7 +196,7 @@ def profil_gen():
         }
 
     # génération propre
-    nombre = int(input("[-] Combien de profils générer ? : ").strip())
+    nombre = int(input("[-] Chow many profiles to generate ?: ").strip())
 
     for _ in range(nombre):
         print(creer_profil())

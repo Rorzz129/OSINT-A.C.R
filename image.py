@@ -4,7 +4,7 @@ import exifread
 import os
 
 def pause():
-    input("\nAppuie sur Entrée pour continuer...")
+    input("\nPress any keys to continue... ")
 
 
 def clear():
@@ -75,7 +75,7 @@ print("""
 """)
 
 try:
-    choix = int(input("Choisis l'outil : "))
+    choix = int(input("choose an Option : "))
 except:
     print("invalid Enter")
     exit()

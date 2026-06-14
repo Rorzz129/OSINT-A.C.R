@@ -5,7 +5,7 @@ import os
 import whois
 
 def pause():
-    input("\nAppuie sur Entrée pour continuer...")
+    input("\nPress any keys to continue...")
 
 
 def clear():
@@ -14,12 +14,12 @@ def clear():
 def port():
     clear()
 
-    target = input("IP ou domaine : ").strip()
+    target = input("IP or domaine : ").strip()
 
     try:
         ip = socket.gethostbyname(target)
     except:
-        print("Erreur : cible invalide.")
+        print("Erreur : invalid target")
         pause()
         return
 
@@ -59,7 +59,7 @@ def port():
 
         sock.close()
 
-    print("\nScan terminé")
+    print("\nScan finished.. ")
     pause()
 
 def dns():
@@ -76,14 +76,12 @@ def dns():
         print(f"Domaine        : {domain}")
         print(f"IP principale  : {ip}")
 
-        # Reverse lookup (IP -> hostname)
         try:
             host = socket.gethostbyaddr(ip)
             print(f"Hostname       : {host[0]}")
         except:
             print("Hostname       : introuvable")
 
-        # Toutes les IPs (si plusieurs serveurs)
         try:
             all_ips = socket.gethostbyname_ex(domain)[2]
             print("\n--- Toutes les IPs ---")
@@ -93,14 +91,14 @@ def dns():
             pass
 
     except:
-        print("Erreur : domaine introuvable ou DNS invalide.")
+        print("Error: Domain not found or DNS invalid")
 
     pause()
 
 def ip():
     clear()
 
-    ip = input("IP à analyser : ").strip()
+    ip = input("IP to analyze : ").strip()
 
     try:
         r = requests.get(f"http://ip-api.com/json/{ip}")
@@ -119,7 +117,7 @@ def ip():
         print(f"Longitude : {data.get('lon')}")
 
     except:
-        print("Erreur lors de la requête.")
+        print("Error during query")
 
     pause()
 
@@ -137,15 +135,15 @@ def header():
             print(f"{key:<20} : {value}")
 
         interesting = {
-        "Server": "Serveur Web",
-        "X-Powered-By": "Technologie",
-        "Content-Type": "Type de contenu",
-        "Content-Length": "Taille",
-        "Strict-Transport-Security": "HSTS",
-        "Content-Security-Policy": "CSP",
-        "X-Frame-Options": "Protection Frame",
-        "Set-Cookie": "Cookies",
-    }
+            "Server": "Web server",
+            "X-Powered-By": "Technology",
+            "Content-Type": "Content type",
+            "Content-Length": "Size",
+            "Strict-Transport-Security": "HSTS",
+            "Content-Security-Policy": "CSP",
+            "X-Frame-Options": "Frame protection",
+            "Set-Cookie": "Cookies",
+        }
         for header, desc in interesting.items():
             value = r.headers.get(header)
 
@@ -153,7 +151,7 @@ def header():
             print(f"{desc:<25}: {value}")
 
     except Exception as e:
-        print(f"Erreur : {e}")
+        print(f"ERROR : {e}")
 
     pause()
 
@@ -167,18 +165,18 @@ def whoiss():
 
         print("\n------ WHOIS LOOKUP -----\n")
 
-        print(f"Domaine        : {w.domain_name}")
+        print(f"Domain         : {w.domain_name}")
         print(f"Registrar      : {w.registrar}")
         print(f"WHOIS Server   : {w.whois_server}")
         print(f"Status         : {w.status}")
-        print(f"Créé le        : {w.creation_date}")
-        print(f"Mis à jour le  : {w.updated_date}")
-        print(f"Expire le      : {w.expiration_date}")
+        print(f"Created on     : {w.creation_date}")
+        print(f"Updated on     : {w.updated_date}")
+        print(f"Expires on     : {w.expiration_date}")
         print(f"Emails         : {w.emails}")
         print(f"DNS            : {w.name_servers}")
         print(f"DNSSEC         : {w.dnssec}")
-        print(f"Organisation   : {w.org}")
-        print(f"Pays           : {w.country}")
+        print(f"Organization   : {w.org}")
+        print(f"Country        : {w.country}")
 
     except Exception as e:
         print(f"Erreur : {e}")
@@ -207,7 +205,7 @@ def main():
         print("[3] - IP LookUp")
         print("[4] - Website Header LookUp")
         print("[5] - Whois LookUp")
-        print("[6] - Quitter")
+        print("[6] - Leave")
 
         choix = input("\n Choose an Option: ").strip()
 

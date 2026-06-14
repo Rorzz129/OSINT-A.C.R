@@ -177,7 +177,7 @@ def banner():
 def main():
     banner()
 
-    username = input("👤 Username > ").strip()
+    username = input("[👤] Username > ").strip()
 
     print("\n[-] Scanning...\n")
 

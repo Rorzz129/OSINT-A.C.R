@@ -32,10 +32,10 @@ def menu():
     print("[1] - Sherlock Equivalent ",) 
     print("[2] - Dox.TXT")
     print("[3] - wordlist Generator")
-    print("[4] - Analyse d'Image")
+    print("[4] - Image Analysis")
     print("[5] - ID creator")
     print("[6] - LookUp")
-    print("[0] - Quitter ! ")
+    print("[0] - lEAVE ! ")
 def main():
     while True:
         banner()

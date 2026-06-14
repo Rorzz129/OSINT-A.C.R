@@ -1,12 +1,19 @@
 import os
 import subprocess
 
+def pause():
+    input("\n[-] Press any keys to continue...")
+
+
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
+clear()
 banner = """                             
-⠀ 
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣶⣿⣿⣿⣿⣿⣶⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠆       Osint - DoxTemplate
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠆       Osint - Dox Template
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣽⣿⣿⣿⣿⣿⣿⣿⡟⠀            By Rorz X Offset
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⡿⠁
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⢻⣿⣿⣿⣿⣿⣿⡀
@@ -15,14 +22,13 @@ banner = """
 ⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⣰⣿⣷⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀
 ⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢰⣿⣿⣿⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀
 ⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇     
-                        
-                        
-                        
+                                            
 """
 
 print(banner)
 
-# 🔧 Fonction pour aligner proprement
+
+
 def ligne(label, valeur):
     return f"{label:<22} : {valeur}"
 
@@ -36,20 +42,20 @@ if choice == '0':
     subprocess.run(["python", "menu.py"])
     exit()
 
-why = input("[+] Pourquoi Cette Fiche : ")
+why = input("[+] Why This Sheet : ")
 
-print("Cible Principal")
+print("Main Target")
 print("-------------------------------------")
 
-nom = input("[+] Nom : ")
-Prenom = input("[+] Prenom : ")
+nom = input("[+] Name : ")
+Prenom = input("[+] First name : ")
 Pseudo = input("[+] Pseudo : ")
 Pseudo2 = input("[+] Pseudo 2 : ")
 Ville = input("[+] Ville : ")
-pays = input("[+] Pays : ")
+pays = input("[+] Country : ")
 adress = input("[+] Adress : ")
 
-print("\nReseaux sociaux")
+print("\nSocial Media")
 print("-------------------------------------")
 
 insta = input("[+] instagram : ")
@@ -61,51 +67,50 @@ facebook = input("[+] facebook : ")
 print("\nFamilles")
 print("-------------------------------------")
 
-Pn = input("[+] Nom,Prenom père : ")
-Mn = input("[+] Nom,Prenom mère : ")
-Adressen = input("[+] Adresse Parent : ")
-NP = input("[+] Numero père : ")
-NM = input("[+] Numero mère : ")
+Pn = input("[+] Dad name : ")
+Mn = input("[+] Mom name : ")
+Adressen = input("[+] Parent Adress : ")
+NP = input("[+] Dad Phone : ")
+NM = input("[+] Mom Phone : ")
 
-print("\nInformations de contact")
+print("\nContact information")
 print("-------------------------------------")
 
 mail = input("[+] Mail : ")
-num = input("[+] Numero : ")
-maill = input("[+] Ancien Mail : ")
+num = input("[+] Phone Number : ")
+maill = input("[+] old eMail : ")
 
 print("\nInfo +")
 print("-------------------------------------")
 
 password = input("[+] Password : ")
-compte = input("[+] Compte liée au Mail : ")
+compte = input("[+] account link to the Mail : ")
 ID = input("[+] ID Discord: ")
 IDD = input("[+] ID Site: ")
 animal = input("[+] Animal Name: ")
 Pass = input("[+] Passion : ")
-Jeux = input("[+] Jeux préférés : ")
+Jeux = input("[+] Favorite Game : ")
 
 print("\nNote +")
 print("-------------------------------------")
 
-note = input("des choses en + ? ")
+note = input("things in + ? ")
 
-# 📄 Texte final avec alignement + banner
 texte = f"""{banner}
 
-{ligne("Pourquoi Cette Fiche ? ", why)}
+{ligne("[+] Why This Sheet : ", why)}
 
-================= CIBLE PRINCIPALE =================
+================= Main target =================
 
-{ligne("Nom", nom)}
-{ligne("Prenom", Prenom)}
-{ligne("Pseudo", Pseudo)}
-{ligne("Pseudo Secondaire", Pseudo2)}
-{ligne("Ville", Ville)}
-{ligne("Pays", pays)}
-{ligne("Adresse", adress)}
+{ligne("Last name", nom)}
+{ligne("First name", Prenom)}
+{ligne("Username", Pseudo)}
+{ligne("Secondary username", Pseudo2)}
+{ligne("City", Ville)}
+{ligne("Country", pays)}
+{ligne("Address", adress)}
 
-================= RESEAUX SOCIAUX =================
+================= SOCIAL NETWORKS =================
 
 {ligne("Instagram", insta)}
 {ligne("TikTok", tiktok)}
@@ -113,36 +118,34 @@ texte = f"""{banner}
 {ligne("Twitter", X)}
 {ligne("Facebook", facebook)}
 
-================= FAMILLE =================
+================= FAMILY =================
 
-{ligne("Pere", Pn)}
-{ligne("Mere", Mn)}
-{ligne("Adresse parents", Adressen)}
-{ligne("Numero pere", NP)}
-{ligne("Numero mere", NM)}
+{ligne("Father", Pn)}
+{ligne("Mother", Mn)}
+{ligne("Parents' address", Adressen)}
+{ligne("Father's number", NP)}
+{ligne("Mother's number", NM)}
 
-=================CONTACT =================
+================= CONTACT =================
 
-{ligne("Mail", mail)}
-{ligne("Numero", num)}
-{ligne("Mail 2", maill)}
+{ligne("Email", mail)}
+{ligne("Phone number", num)}
+{ligne("Secondary email", maill)}
 
 ================= INFO + =================
 
 {ligne("Password", password)}
-{ligne("Compte lie", compte)}
-{ligne("ID Discord", ID)}
-{ligne("ID Sites", IDD)}
+{ligne("Account link", compte)}
+{ligne("Discord ID", ID)}
+{ligne("Website IDs", IDD)}
 {ligne("Animal", animal)}
-{ligne("Passion", Pass)}
-{ligne("Jeux Pref", Jeux)}
-
+{ligne("Hobby", Pass)}
+{ligne("Favorite game", Jeux)}
 ================= Note + =================
 
-{ligne("des choses en + ?  ", note)}
+{ligne("thing more ?  ", note)}
 """
 
-# 📁 Nom du fichier basé sur le prénom
 nom_fichier = f"{Prenom}.txt"
 chemin = os.path.join(os.path.dirname(__file__), nom_fichier)
 
@@ -150,4 +153,5 @@ chemin = os.path.join(os.path.dirname(__file__), nom_fichier)
 with open(chemin, "w", encoding="utf-8") as fichier:
     fichier.write(texte)
 
-print(f"\n✅ Données enregistrées dans {nom_fichier}")
+print(f"\nDate saved in {nom_fichier}")
+pause()
