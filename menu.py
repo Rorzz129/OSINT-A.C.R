@@ -27,7 +27,7 @@ def banner():
 """)
 
 def menu():
-    print("Toujours En Dev !")
+    print("Still in Dev !")
     print()
     print("[1] - Sherlock Equivalent ",) 
     print("[2] - Dox.TXT")
@@ -40,7 +40,7 @@ def main():
     while True:
         banner()
         menu()
-        choice=input("\nChoix > ").strip()
+        choice=input("\nChoice > ").strip()
 
         if choice=="1":
             subprocess.run(["python","roz.py"])
