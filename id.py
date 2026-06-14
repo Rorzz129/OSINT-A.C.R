@@ -1,6 +1,9 @@
 import os
 import subprocess
 import json
+import random
+
+dossier = "id"
 
 def ask(prompt: str, obligatoire: bool = False):
     while True:
@@ -13,7 +16,7 @@ def ask(prompt: str, obligatoire: bool = False):
         return reponse
     
 def pause():
-    input("\nAppuie sur Entrée pour continuer...")
+    input("\n[-] Appuie sur Entrée pour continuer...")
 
 
 def clear():
@@ -59,7 +62,7 @@ def add():
         "email_backup": ask("[+] Email de secours"),
     }
 
-    print("profil create successfully")
+    print("[-] profil create successfully")
 
     os.makedirs("add", exist_ok=True)
 
@@ -69,7 +72,7 @@ def add():
     with open(path, "w", encoding="utf-8") as file:
         json.dump(champs, file, indent=4, ensure_ascii=False)
 
-    print(f"\nProfil sauvegardé dans {path}")
+    print(f"\n[-] Profil sauvegardé dans {path}")
 
     pause()
 
@@ -83,13 +86,13 @@ def show():
         pause()
         return
 
-    print("\n===== PROFILS DISPONIBLES =====\n")
+    print("\n[-] PROFILS DISPONIBLES [-]\n")
 
     for i, p in enumerate(profils, 1):
         print(f"[{i}] {p}")
 
     try:
-        choix = int(input("\nChoisis un profil : ").strip())
+        choix = int(input("\n[-] Choisis un profil : ").strip())
     except ValueError:
         print("Choix invalide.")
         pause()
@@ -108,7 +111,7 @@ def show():
 
     clear()
 
-    print("\n===== PROFIL =====\n")
+    print("\n[-] PROFIL [-]\n")
 
     for key, value in data.items():
         print(f"{key:<20} : {value}")
@@ -157,6 +160,49 @@ def delete_profile():
 
     pause()
 
+def profil_gen():
+    dossier = "id"
+
+    def lire_fichier(fichier):
+        chemin = os.path.join(dossier, fichier)
+        if not os.path.exists(chemin):
+            print(f"[ERREUR] Fichier manquant : {chemin}")
+            return []
+
+        with open(chemin, "r", encoding="utf-8") as f:
+            return [line.strip() for line in f if line.strip()]
+
+    ages = lire_fichier("age.txt")
+    jobs = lire_fichier("jobs.txt")
+    nationalites = lire_fichier("nationalite.txt")
+    noms = lire_fichier("nom.txt")
+    prenoms = lire_fichier("prenom.txt")
+    pseudos = lire_fichier("pseudo.txt")
+
+    # sécurité si fichiers vides
+    if not all([ages, jobs, nationalites, noms, prenoms, pseudos]):
+        print("Erreur : un ou plusieurs fichiers sont vides.")
+        pause()
+        return
+
+    def creer_profil():
+        return {
+            "prenom": random.choice(prenoms),
+            "nom": random.choice(noms),
+            "age": random.choice(ages),
+            "job": random.choice(jobs),
+            "nationalite": random.choice(nationalites),
+            "pseudo": random.choice(pseudos)
+        }
+
+    # génération propre
+    nombre = int(input("[-] Combien de profils générer ? : ").strip())
+
+    for _ in range(nombre):
+        print(creer_profil())
+
+    pause()
+
 
 def main(): 
     while True:
@@ -179,9 +225,10 @@ def main():
         print("\n1 - Add Profiles")
         print("2 - show Profiles")
         print("3 - Delete Profiles")
-        print("4 - Revenir en arriere")
+        print("4 - Generator ID")
+        print("5 - Menu.py")
 
-        choix = input("\n Choose an Option: ").strip()
+        choix = input("\n[-] Choose an Option: ").strip()
 
         if choix == "1":
             add()
@@ -192,7 +239,10 @@ def main():
         elif choix == "3":
             delete_profile()
 
-        elif choix == '4':
+        elif choix == "4":
+            profil_gen()
+
+        elif choix == '5':
             subprocess.run(["python", "menu.py"])
 
         else:

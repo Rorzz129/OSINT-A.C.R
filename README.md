@@ -15,8 +15,10 @@ Le projet est activement maintenu et recevra régulièrement des mises à jour, 
 ### [+] Analyse EXIF
 ### [+] Sherlock - Recherche de pseudo 
 ### [+] Wordlist Generator
-### [+] Identities Manager
-### [+] IP / DNS / PORT lookUp
+### [+] Identities Manager 
+### [+] IP / DNS / PORT lookUp / 
+
+### I ADD Identities Generator / header LookUp / Whois LookUp
 
 
 <img width="502" height="392" alt="Capture d&#39;écran 2026-06-14 011716" src="https://github.com/user-attachments/assets/80f5b5bf-28c7-48f7-b7c3-d6425a2a4091" />

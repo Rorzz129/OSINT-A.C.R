@@ -1,0 +1,111 @@
+Développeur web
+Développeur logiciel
+Data scientist
+Data analyst
+Ingénieur IA
+Administrateur système
+Analyste cybersécurité
+DevOps engineer
+UX/UI designer
+Game developer
+Médecin généraliste
+Chirurgien
+Infirmier
+Aide-soignant
+Pharmacien
+Kinésithérapeute
+Dentiste
+Radiologue
+Psychologue
+Vétérinaire
+Architecte
+Maçon
+Électricien
+Plombier
+Soudeur
+Ingénieur civil
+Chef de chantier
+Menuisier
+Technicien industriel
+Géomètre
+Comptable
+Expert-comptable
+Analyste financier
+Banquier
+Trader
+Conseiller bancaire
+Responsable marketing
+Chef de projet
+Entrepreneur
+Consultant
+Graphiste
+Illustrateur
+Photographe
+Vidéaste
+Monteur vidéo
+Journaliste
+Rédacteur web
+Réalisateur
+Musicien
+Designer produit
+Chauffeur routier
+Chauffeur VTC
+Pilote d’avion
+Hôtesse de l’air
+Steward
+Logisticien
+Cariste
+Chef d’entrepôt
+Livreur
+Contrôleur aérien
+Marin
+Policier
+Gendarme
+Pompier
+Militaire
+Agent de sécurité
+Avocat
+Juge
+Procureur
+Détective privé
+Criminologue
+Agriculteur
+Agronome
+Jardinier
+Paysagiste
+Forestier
+Océanographe
+Écologue
+Éleveur
+Ingénieur environnement
+Garde forestier
+Professeur des écoles
+Professeur de lycée
+Enseignant universitaire
+Chercheur
+Historien
+Mathématicien
+Physicien
+Linguiste
+Formateur
+Bibliothécaire
+Caissier
+Vendeur
+Responsable magasin
+Serveur
+Barman
+Chef cuisinier
+Coiffeur
+Esthéticienne
+Réceptionniste
+Agent immobilier
+Astronaute
+Pilote de drone
+Influenceur
+Streamer
+Testeur de jeux vidéo
+Chasseur de têtes
+Éthologue
+Sommelier
+Designer automobile
+Parfumeur

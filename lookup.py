@@ -2,6 +2,7 @@ import requests
 import socket
 import subprocess
 import os
+import whois
 
 def pause():
     input("\nAppuie sur Entrée pour continuer...")
@@ -9,8 +10,6 @@ def pause():
 
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
-
-import socket
 
 def port():
     clear()
@@ -124,28 +123,91 @@ def ip():
 
     pause()
 
+def header():
+    clear()
+
+    url = input("URL (https://...) : ").strip()
+
+    try:
+        r = requests.get(url, timeout=5)
+
+        print("\n===== WEBSITE HEADERS =====\n")
+
+        for key, value in r.headers.items():
+            print(f"{key:<20} : {value}")
+
+        interesting = {
+        "Server": "Serveur Web",
+        "X-Powered-By": "Technologie",
+        "Content-Type": "Type de contenu",
+        "Content-Length": "Taille",
+        "Strict-Transport-Security": "HSTS",
+        "Content-Security-Policy": "CSP",
+        "X-Frame-Options": "Protection Frame",
+        "Set-Cookie": "Cookies",
+    }
+        for header, desc in interesting.items():
+            value = r.headers.get(header)
+
+        if value:
+            print(f"{desc:<25}: {value}")
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+
+    pause()
+
+def whoiss():
+    clear()
+
+    domain = input("Domaine : ").strip()
+
+    try:
+        w = whois.whois(domain)
+
+        print("\n------ WHOIS LOOKUP -----\n")
+
+        print(f"Domaine        : {w.domain_name}")
+        print(f"Registrar      : {w.registrar}")
+        print(f"WHOIS Server   : {w.whois_server}")
+        print(f"Status         : {w.status}")
+        print(f"Créé le        : {w.creation_date}")
+        print(f"Mis à jour le  : {w.updated_date}")
+        print(f"Expire le      : {w.expiration_date}")
+        print(f"Emails         : {w.emails}")
+        print(f"DNS            : {w.name_servers}")
+        print(f"DNSSEC         : {w.dnssec}")
+        print(f"Organisation   : {w.org}")
+        print(f"Pays           : {w.country}")
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+
+    pause()
+
 def main():
     while True:
         print("""
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠤⠴⠶⡇
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣶⣾⣿⡟
-⠀⠀⠀⠀⠀⠀⠀⠂⠉⡇⠀⠀⠀⢰⣿⣿⣿⣿⣧⠀⠀⢀⣄⣀
-⠀⠀⠀⠀⠀⠀⢠⣶⣶⣷⠀⠀⠀⠸⠟⠁⠀⡇⠀⠀⠀⠀⠀⢹
-⠀⠀⠀⠀⠀⠀⠘⠟⢹⣋⣀⡀⢀⣤⣶⣿⣿⣿⣿⣿⡿⠛⣠⣼⣿⡟
-⠀⠀⠀⠀⠀⣴⣾⣿⣿⣿⣿⢁⣾⣿⣿⣿⣿⣿⣿⡿⢁⣾⣿⣿⣿⠁         Look Up - IP / DNS / Port
-⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⠿⠇             By Rorz X Offset
-⠀⠀⠀⠳⣤⣙⠟⠛⢻⠿⣿⠸⣿⣿⣿⣿⣿⣿⣿⣇⠘⠉⠀⢸⠀⢀⣠
-⠀⠀⠀⠀⠈⠻⣷⣦⣼⠀⠀⠀⢻⣿⣿⠿⢿⡿⠿⣿⡄⠀⠀⣼⣷⣿⣿
-⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣶⣄⡈⠉⠀⠀⢸⡇⠀⠀⠉⠂⠀⣿⣿⣿⣧
-⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣷⣤⣀⣸⣧⣠⣤⣴⣶⣾⣿⣿⣿⡿
-⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇
-⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠟⠛⠉
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣶⣿⣿⣿⣿⣿⣶⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠆       Osint - LookUp
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣽⣿⣿⣿⣿⣿⣿⣿⡟⠀            By Rorz X Offset
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⡿⠁
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⢻⣿⣿⣿⣿⣿⣿⡀
+⠀⠀⠀⠀⢀⣠⣤⣴⣾⣿⣿⣿⠛⠀⠙⡿⠟⠋⠀⣿⣿⣦⣄⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⡟⠀⣰⣿⣿⣆⠀⢰⣿⣿⣿⣿⣿⣷⣶⣄⡀⠀⠀
+⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⣰⣿⣷⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀
+⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢰⣿⣿⣿⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀
+⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿⣿⣿⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇     
     """)
     
         print("\n[1] - Port Analyser")
         print("[2] - DNS LookUp")
         print("[3] - IP LookUp")
-        print("[4] - Quitter")
+        print("[4] - Website Header LookUp")
+        print("[5] - Whois LookUp")
+        print("[6] - Quitter")
 
         choix = input("\n Choose an Option: ").strip()
 
@@ -158,7 +220,13 @@ def main():
         elif choix == "3":
             ip()
 
-        elif choix == '4':
+        elif choix == "4":
+            header()
+
+        elif choix == "5":
+            whoiss()
+
+        elif choix == '6':
             subprocess.run(["python", "menu.py"])
 
         else:
