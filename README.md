@@ -1,6 +1,6 @@
-#🔎 OSINT Toolkit {Still in Development}
+# 🔎 OSINT Toolkit {Still in Development}
 
-##📖 Description
+## 📖 Description
 
 OSINT Toolkit is an open-source suite dedicated to Open Source Intelligence (OSINT). The project brings together several features that allow users to collect, analyze, and exploit publicly available information.
 The goal is to provide a simple, fast, and scalable platform for cybersecurity enthusiasts, researchers, students, and professionals who want to perform OSINT investigations from a single interface.
