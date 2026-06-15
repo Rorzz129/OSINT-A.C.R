@@ -15,4 +15,4 @@ The project is actively maintained and will receive regular updates, new feature
 ### [+] IP / DNS / Port lookup
 I added Identity Generator / Header Lookup / WHOIS Lookup
 
-<img width="571" height="510" alt="Capture d&#39;écran 2026-06-14 152033" src="https://github.com/user-attachments/assets/04172dea-c3c9-4b19-b6c4-3ae182cb7b5f" />
+<img width="593" height="524" alt="image" src="https://github.com/user-attachments/assets/d643a1ef-0d3d-49cb-ad33-d5062025606e" />
