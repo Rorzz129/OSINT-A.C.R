@@ -11,8 +11,11 @@ The project is actively maintained and will receive regular updates, new feature
 ### [+] EXIF Analysis
 ### [+] Sherlock – Username search
 ### [+] Wordlist Generator
-### [+] Identity Manager
+### [+] Identity Manager / Genetator
 ### [+] IP / DNS / Port lookup
-I added Identity Generator / Header Lookup / WHOIS Lookup
 
-<img width="571" height="510" alt="Capture d&#39;écran 2026-06-14 152033" src="https://github.com/user-attachments/assets/04172dea-c3c9-4b19-b6c4-3ae182cb7b5f" />
+# I added an Autodorker & fix the exif analyst
+
+
+<img width="578" height="582" alt="image" src="https://github.com/user-attachments/assets/b665897d-5fbd-4761-b549-6624806eb316" />
+
