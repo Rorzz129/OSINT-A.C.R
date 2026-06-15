@@ -15,6 +15,7 @@ def extract_exif(image_path):
         tags = exifread.process_file(f)
     return tags
 
+clear()
 
 def convert_to_degrees(value):
     d = float(value.values[0].num) / float(value.values[0].den)

@@ -66,7 +66,7 @@ def add():
 
     os.makedirs("add", exist_ok=True)
 
-    filename = champs["profil_name"].strip().replace(" ", "_")
+    filename = champs["profile_name"].strip().replace(" ", "_")
     path = f"add/{filename}.json"
 
     with open(path, "w", encoding="utf-8") as file:

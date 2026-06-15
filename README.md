@@ -16,4 +16,3 @@ The project is actively maintained and will receive regular updates, new feature
 I added Identity Generator / Header Lookup / WHOIS Lookup
 
 <img width="571" height="510" alt="Capture d&#39;écran 2026-06-14 152033" src="https://github.com/user-attachments/assets/04172dea-c3c9-4b19-b6c4-3ae182cb7b5f" />
-

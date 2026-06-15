@@ -2,6 +2,7 @@ import asyncio
 import aiohttp
 import subprocess
 import webbrowser
+import os
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
@@ -113,6 +114,13 @@ SITES = {
 
 }
 
+def pause():
+    input("\nPress")
+
+
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
 async def check(session, sem, site, url, username):
     async with sem:
         full_url = url.replace("{}", username)
@@ -159,6 +167,7 @@ async def run(username):
 
 
 def banner():
+    clear()
     print("""
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣶⣿⣿⣿⣿⣿⣶⡀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿
