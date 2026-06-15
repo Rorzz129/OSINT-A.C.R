@@ -34,7 +34,7 @@ def menu():
 ╠═════════════════╦═════════════════════╣
 ║ [1] Sherlock    ║ [5] ID creator      ║
 ║                 ║                     ║
-║ [2] Dox.TXT     ║ [6] LookUp          ║
+║ [2] nothing     ║ [6] LookUp          ║
 ║                 ║                     ║
 ║ [3] WordlistGen ║ [7] AutoDorker      ║
 ║                 ║                     ║
